@@ -53,6 +53,40 @@ python3 example.py
 | `emissions` | string | CO2 estimate as shown. |
 …and 2 more fields — full schema on the [live page](https://quanticdata.io/collectors/google-flights-api/).
 
+## Node.js
+
+Node 18 or newer, no dependencies. See [`example.mjs`](example.mjs):
+
+```bash
+export QD_API_KEY=qd_live_...
+node example.mjs JFK LAX 2026-11-18 2026-11-25
+```
+
+With no dates it searches a round trip starting 45 days from today.
+
+## Sample response
+
+A real run from 4 October 2026: JFK to LAX, out 18 November, back 25 November, three rows requested. The rows arrive in `payload.results`; one is shown here and the full capture is in [`sample-response.json`](sample-response.json).
+
+```json
+{
+  "rank": 1,
+  "airline": "Delta",
+  "departure_time": "8:00 AM",
+  "arrival_time": "11:19 AM",
+  "duration": "6 hr 19 min",
+  "stops": "Nonstop",
+  "price": "$408",
+  "price_value": 408,
+  "currency": "$",
+  "departure_airport": "John F. Kennedy International Airport",
+  "arrival_airport": "Los Angeles International Airport",
+  "emissions": "249 kg CO2e",
+  "outbound_date": "2026-11-18",
+  "return_date": "2026-11-25"
+}
+```
+
 ## Pricing
 
 **$0.003 per delivered itinerary** ($3 per 1,000). A run that delivers nothing costs nothing, and failed rows are never billed. The $2/month free allowance covers roughly 666 itinerarys — no card required.
